@@ -69,13 +69,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* dark mode */
 const btnModoOscuro = document.getElementById("modo-oscuro-toggle");
-btnModoOscuro.addEventListener("click", () => {
-  document.body.classList.toggle("modo-oscuro");
 
-  // Cambia ícono y texto según el modo
-  if (document.body.classList.contains("modo-oscuro")) {
-    btnModoOscuro.textContent = "☀️";
-  } else {
-    btnModoOscuro.textContent = "🌙";
+// Función para actualizar el ícono y tooltip según el modo actual
+function actualizarBotonModo() {
+  const esModoOscuro = document.body.classList.contains("modo-oscuro");
+  btnModoOscuro.textContent = esModoOscuro ? "☀️" : "🌙";
+  btnModoOscuro.title = esModoOscuro ? "Modo claro" : "Modo oscuro";
+  btnModoOscuro.style.color = esModoOscuro ? "#f5c85c" : "#333";
+}
+
+// Leer el modo almacenado al cargar
+document.addEventListener("DOMContentLoaded", () => {
+  const modoGuardado = localStorage.getItem("modo-oscuro");
+  if (modoGuardado === "true") {
+    document.body.classList.add("modo-oscuro");
   }
+
+  actualizarBotonModo();
+
+  btnModoOscuro.addEventListener("click", () => {
+    document.body.classList.toggle("modo-oscuro");
+
+    // Guardar el modo actual
+    const modoActual = document.body.classList.contains("modo-oscuro");
+    localStorage.setItem("modo-oscuro", modoActual);
+
+    actualizarBotonModo();
+  });
 });
+
