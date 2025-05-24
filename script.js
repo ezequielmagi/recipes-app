@@ -22,7 +22,7 @@ const recetas = [
   }
 ];
 
-function mostrarRecetas() {
+function mostrarRecetas(lista) {
   /* en mi HTML tengo el contenedor donde se van a mostrar las recetas
     y lo llamo por su id */
   const contenedor = document.getElementById("lista-recetas");
@@ -30,7 +30,13 @@ function mostrarRecetas() {
   contenedor.innerHTML = "";
     /* recorro el array de recetas y por cada receta creo un nuevo elemento
         del DOM, le asigno el contenido y lo añado al contenedor */
-  recetas.forEach((receta) => {
+
+    if (lista.length === 0) {
+    contenedor.innerHTML = "<p>No se encontraron recetas.</p>";
+    return;
+  }
+
+  lista.forEach((receta) => {
     /* creo un nuevo elemento del DOM */
     const recetaDiv = document.createElement("article");
     /* creo los elementos que van a contener los datos de la receta */
@@ -46,4 +52,18 @@ function mostrarRecetas() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", mostrarRecetas);
+function filtrarRecetas(evento) {
+  const texto = evento.target.value.toLowerCase();
+  const resultados = recetas.filter(receta =>
+    receta.titulo.toLowerCase().includes(texto)
+  );
+  mostrarRecetas(resultados);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  mostrarRecetas(recetas);
+
+  const inputBuscador = document.getElementById("buscador");
+  inputBuscador.addEventListener("input", filtrarRecetas);
+});
+
