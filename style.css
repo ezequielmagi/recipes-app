@@ -13,10 +13,37 @@ body {
 }
 
 header {
-  background: #f8b500;
-  color: white;
-  padding: 1rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff3cd;
+  padding: 2rem 1rem;
+  gap: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #a0522d;
+}
+
+/* Estilo del input de búsqueda */
+#buscador {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.75rem 1rem;
+  border: 2px solid #f5c85c;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fffdf5;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#buscador:focus {
+  outline: none;
+  border-color: #e0a800;
+  box-shadow: 0 0 0 3px rgba(224, 168, 0, 0.3);
 }
 
 #lista-recetas {
