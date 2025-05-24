@@ -98,3 +98,82 @@ header h1 {
 #lista-recetas p {
   color: #333;
 }
+
+header {
+  position: relative;
+}
+
+#modo-oscuro-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+
+/* Estilo del botón */
+/* Ícono modo claro (☀️, modo oscuro activo) */
+body.modo-oscuro #modo-oscuro-toggle {
+  color: #f5c85c; /* amarillo claro */
+}
+
+/* Ícono modo oscuro (🌙, modo claro activo) */
+body:not(.modo-oscuro) #modo-oscuro-toggle {
+  color: #333; /* oscuro para luna */
+}
+
+
+body.modo-oscuro #modo-oscuro-toggle {
+  color: #f5c85c;
+}
+
+body.modo-oscuro #modo-oscuro-toggle:hover {
+  color: #ffe187;
+}
+
+/* Estilo del modo oscuro */
+body.modo-oscuro {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+}
+
+body.modo-oscuro header {
+  background-color: #2c2c2c;
+}
+
+body.modo-oscuro #buscador {
+  background-color: #333;
+  color: #fff;
+  border-color: #888;
+}
+
+body.modo-oscuro #buscador:focus {
+  border-color: #bbb;
+  box-shadow: 0 0 0 3px rgba(200, 200, 200, 0.2);
+}
+
+body.modo-oscuro #modo-oscuro-toggle {
+  background-color: #444;
+  color: #eee;
+}
+
+body.modo-oscuro #lista-recetas article {
+  background-color: #2d2d2d;
+  border: 1px solid #444;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.05);
+}
+body.modo-oscuro #lista-recetas article p{
+
+  color: #f1f1f1;
+}
+
+body.modo-oscuro a {
+  color: #ffc107;
+}
+
+#modo-oscuro-toggle {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s ease;
+}

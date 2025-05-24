@@ -67,3 +67,15 @@ document.addEventListener("DOMContentLoaded", () => {
   inputBuscador.addEventListener("input", filtrarRecetas);
 });
 
+/* dark mode */
+const btnModoOscuro = document.getElementById("modo-oscuro-toggle");
+btnModoOscuro.addEventListener("click", () => {
+  document.body.classList.toggle("modo-oscuro");
+
+  // Cambia ícono y texto según el modo
+  if (document.body.classList.contains("modo-oscuro")) {
+    btnModoOscuro.textContent = "☀️";
+  } else {
+    btnModoOscuro.textContent = "🌙";
+  }
+});
