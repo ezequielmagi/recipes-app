@@ -1,26 +1,4 @@
-const recetas = [
-  {
-    id: 1,
-    titulo: "Tortilla de Patatas",
-    portada: "./img/tortilladepapas.png",
-    ingredientes: ["Patatas", "Huevos", "Aceite", "Sal"],
-    instrucciones: "Pelar, cortar y freír las patatas. Batir huevos y mezclar."
-  },
-  {
-    id: 2,
-    titulo: "Ensalada César",
-    portada: "./img/ensaladaceasar.png",
-    ingredientes: ["Lechuga", "Pollo", "Queso", "Aderezo César"],
-    instrucciones: "Mezclar todos los ingredientes y servir."
-},
-{
-    id: 3,
-    titulo: "Spaghetti Bolognesa",
-    portada: "./img/spagettibolognesa.png",
-    ingredientes: ["Spaghetti", "Carne", "Tomate", "Cebolla", "Ajo"],
-    instrucciones: "Cocinar la pasta y preparar la salsa con los ingredientes."
-  }
-];
+let recetas = []; // Se llenará desde el backend
 
 function mostrarRecetas(lista) {
   /* en mi HTML tengo el contenedor donde se van a mostrar las recetas
@@ -60,8 +38,28 @@ function filtrarRecetas(evento) {
   mostrarRecetas(resultados);
 }
 
+// document.addEventListener("DOMContentLoaded", () => {
+//   mostrarRecetas(recetas);
+
+//   const inputBuscador = document.getElementById("buscador");
+//   inputBuscador.addEventListener("input", filtrarRecetas);
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
-  mostrarRecetas(recetas);
+  fetch('http://localhost:3000/api/recetas')
+    .then(response => {
+      if (!response.ok) throw new Error('No se pudo obtener las recetas');
+      return response.json();
+    })
+    .then(data => {
+      recetas = data;
+      mostrarRecetas(recetas);
+    })
+    .catch(error => {
+      console.error(error);
+      const contenedor = document.getElementById("lista-recetas");
+      contenedor.innerHTML = "<p>Error al cargar recetas.</p>";
+    });
 
   const inputBuscador = document.getElementById("buscador");
   inputBuscador.addEventListener("input", filtrarRecetas);
